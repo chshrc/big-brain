@@ -8,3 +8,5 @@ Feel free to take advantage of the knowledge written down here for your own lear
 Please also consider extending the knowledge provided here or elsewhere to enhance the availability of open knowledge in our global society.
 
 I am looking forward to you contribution! :)
+
+This work is licensed under CC0 1.0. To view a copy of this license, visit https://creativecommons.org/publicdomain/zero/1.0
