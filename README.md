@@ -2,6 +2,8 @@
 
 This repository is a collection of my notes.
 
+They are solely written in Markdown using [Pandoc Markdown](https://pandoc.org).
+
 It was inspired by watching [rwxrob](https://twitch.tv/rwxrob). Thank you, Rob!
 
 Feel free to take advantage of the knowledge written down here for your own learning journey, as it is public domain!
