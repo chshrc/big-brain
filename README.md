@@ -11,4 +11,4 @@ Please also consider extending the knowledge provided here or elsewhere to enhan
 
 I am looking forward to you contribution! :)
 
-This work is licensed under CC0 1.0. To view a copy of this license, visit https://creativecommons.org/publicdomain/zero/1.0
+This work is licensed under CC0 1.0. To view a copy of this license, visit https://creativecommons.org/publicdomain/zero/1.0. Any code is released with no warranty.
