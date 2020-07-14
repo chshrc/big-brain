@@ -42,7 +42,7 @@ Vi stands for 'visual' and is the visual editor on top of the editor 'X', which 
 The commands executed in the command mode in vi are taken from the 'X' editor.
 
 ### Commands
-`ZZ` and `:x` is a useful shortcut for `:wq` in command mode.
+`ZZ` and `:x` are useful shortcuts for `:wq` in command mode.
 To exit the insert/replace mode, use Ctrl + C instead of escape.
 
 Use `u` to undo an action and `U` to undo actions made in a whole line. Use `Ctrl`+`R` to undo the changes undone by `u`. 
