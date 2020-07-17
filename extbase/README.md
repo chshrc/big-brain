@@ -34,4 +34,73 @@ In PHP the name of the [*constructor*](Link to programming notes) is always `__c
 > ```
 > Here 'red' is an argument.
 
+To check which parent a subclass has, the keyword `instanceof` can be
+used.
+It will return a boolean.
+
+If at least one method of a class is declared as `abstract`, the class is
+considered an `abstract` class.
+> Remember that abstract classes do not implement a body!
+You use abstract classes if you know the class will be needed later but
+the exact implementation details are not yet known by the time of
+writing.
+
+Using an `interface`, methods a class consists of can be defined in
+advance. All classes defined in an `interface` need to be implemented in
+the implementing classes. The methods in an interface need not be
+declared by the keyword `abstract` (redundant as the interface states
+that all methods need to be implemented).
+
+> "The bottom line is that we can implement multiple classes at once but you
+> can only derive (extend) from one
+> class."
+
+Regarding visibility of methods and properties:
+"All properties in Extbase and Fluid are `protected` and all methods are
+`public` (except internal methods)."
+
+Similar to statically typed programming languages, type hints can be used
+in PHP to only pass arguments of certain types as parameters to methods.
+E.g.:
+```php
+public function rent(Car $vehicle)
+{
+	...
+}
+```
+This way `$vehicles` must be of type `Car`.
+> *Important*:
+> Data types array and class names are valid type hints but standard
+> types such as integer, string or boolean
+> are not.
+
+In a similar way, return type declarations can be used to define the type
+of the return value of a method:
+```php
+public function toArray(int $a, int $b): array
+{
+	return [$a, $b];
+}
+```
+A short way to indicate that the return value can be of type array or
+`null` is to write `?array` (only PHP 7+).
+
+Note, that the above code will *not* throw an error if the return value
+type is not identical to the return type.
+
+> *Important*:
+> By default, PHP will coerce values of the wrong type into the expected
+> scalar type if possible.
+> That means, that return types will coerced to the declared type no
+> matter what.
+> To enable strict typing (since PHP 7+) on a per-file basis, add the
+> following statement at the top of the file:
+> ```php
+> declare(strict_types=1)
+> ```
+> This will throw a TypeError if a variable not identical to the type
+> declaration if passed.
+>
+> You *should* definitely use strict typing in all your TYPO3 extensions!
+
 
