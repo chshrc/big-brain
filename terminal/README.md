@@ -44,11 +44,20 @@ untampered command instead of the alias.
 `tmux` is the successor to `screen`, the oldest method to combine
 multiple windows.
 `tmux` adds the concept of panes in addition to windows to multiplexers. 
-It is useful to use screen-centric tmux configuration to use the
-muscle-memory to also apply to systems, where only screen is installed.
+It is useful to use `screen`-centric `tmux` configuration to use the
+muscle-memory to also apply to systems, where only `screen` is installed.
 E.g. binding Ctrl + A instead of Ctrl + B
 
 You have to install the `tmux` package yourself on your system. 
+
+
+
+## curl
+
+Use `curl` to fetch files from URL.
+> *Important*
+> Make sure you can trust the source of the file before downloading
+> anything from the internet.
 
 
 
