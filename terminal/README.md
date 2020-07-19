@@ -39,6 +39,17 @@ Use the `type` command in bash to see if a command is an alias. You can
 use the backspace `\` in front of a command like `\top` to run the
 untampered command instead of the alias.
 
+## Terminal multiplexer
+
+`tmux` is the successor to `screen`, the oldest method to combine
+multiple windows.
+`tmux` adds the concept of panes in addition to windows to multiplexers. 
+It is useful to use screen-centric tmux configuration to use the
+muscle-memory to also apply to systems, where only screen is installed.
+E.g. binding Ctrl + A instead of Ctrl + B
+
+You have to install the `tmux` package yourself on your system. 
+
 
 
 ## Vi(m)
