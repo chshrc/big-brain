@@ -21,7 +21,7 @@ Ctrl + D sends an EOF. It can be used to sometimes exit a CLI. E.g. on the Node.
 ## Operating Systems
 Mac is not suited very well to learn the terminal, as it does not have a linux bash installed. Mac OS itself is a BSD-based operating system (Darwin) and therefore has it differences from a linux terminal.
 
-## Important tips
+## Important tips / bash
 Do NOT use Ctrl + L to clear the screen, use the `clear` command! The shortcut is not available on all systems, only on those w/ emacs mapping.
 
 Remember to use tab/double tab completion!
@@ -35,6 +35,12 @@ In general do not use spaces in filenames on any system unless you have a really
 
 It is much safer to first create a file with `touch` and then edit it afterwards. Consider creating a file in a directory you cannot save to. Then you edited the file in vain.
 
+Use the `type` command in bash to see if a command is an alias. You can
+use the backspace `\` in front of a command like `\top` to run the
+untampered command instead of the alias.
+
+
+
 ## Vi(m)
 
 ### About
@@ -46,3 +52,6 @@ The commands executed in the command mode in vi are taken from the 'X' editor.
 To exit the insert/replace mode, use Ctrl + C instead of escape.
 
 Use `u` to undo an action and `U` to undo actions made in a whole line. Use `Ctrl`+`R` to undo the changes undone by `u`. 
+
+
+
