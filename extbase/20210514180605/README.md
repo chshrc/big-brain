@@ -20,4 +20,4 @@ page.10.1.NO.linkWrap = 1||2 |*||*| 3
 page.10.1.NO.allWrap = |&nbsp;
 ```
 
-gives `1A 2B 1C 2D 3E`
+gives `1A 2B 2C 2D 3E`
