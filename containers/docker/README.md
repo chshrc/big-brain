@@ -7,4 +7,5 @@ You can ensure docker is running by executing the command `docker ps -a`. This w
 For the first container to test the working system you can run `docker run hello-world`. This will create a container from the hello-world image, which is downloaded from the docker repository.
 It should print out a Hello World message plus some additional information. Then you're ready to get started using docker.
 
-# 
+# Docker build process
+In the building process docker sets up multiple layers, when using a Dockerfile. For each line in the file, the docker daemon uses a layer.
