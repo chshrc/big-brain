@@ -103,4 +103,80 @@ type is not identical to the return type.
 >
 > You *should* definitely use strict typing in all your TYPO3 extensions!
 
+### 2.12
+Class names beginning with a backslash \ tell PHP that the class name is a fully qualified class name (FQCN).
+FQCN are usually the namespace + class name.
 
+Using the `use` keyword you can create references to other FQCN outside of the current namespace of the class. Using `as` you can also give the reference an alias:
+```php
+namespace Book\Extbase\Code;
+use Vehicle\Engine\FourWheels as FW;
+
+class Car extends FW 
+{
+  ...
+}
+```
+
+### 2.13
+
+Design patterns are defined code structures to solve problems of a similar kind. That means the solution to e.g. dependency struggles in software development is using Dependency Injection.
+
+In the book only three (out of mentioned ~80) are explained: Singleton, Prototype, DI.
+> Keep in mind that these patterns are framework-independent. They exist not only in extbase.
+
+#### Singleton
+
+Singletons are objects which only exists once at runtime. That means during creation of an object, extbase checks if an object of the same type already exists. If so, it is returned. Otherwise a new object is instantiated.
+> I wonder about the difference concepts of oop here: there are classes, which purely exist to create similar objects of the class. Then again there are static classes which, to me, sound like what singletons are supposed to solve. The difference is that in the first case no object is created. Maybe this is the whole difference. 
+
+In extbase, you use the methode `makeInstance()` of the class GeneralUtility to instantiate objects. This method checks for existing objects of the requested type. The `new()` method is PHP native.
+
+#### Prototype
+The opposite of a singleton: when objects are requested/created extbase always creates a new object.
+
+#### Dependency Injection (DI)
+The goal is to get rid of the load of the object connections to its environment (dependencies). This is done by inversion of control.
+The connections are only relevant to load the dependencies, not the purpose of the object.
+
+Practical example of DI in extbase: using a Repository in a Controller. Instead of instantiating a Repository object using `new()` you just tell the controller the class you wish and the framework does the rest for you (that is, searching an instance and returning it to the controller).
+
+In extbase (!) there are two kinds of DI: Constructor DI and Setter DI. Typically in TYPO3 Setter DI is the way to go and looks like this:
+```php
+/**
+  * Blog Repository
+  *
+  * @var \ExtbaseBook\Simpleblog\Domain\Repository\BlogRepository
+  */
+protected $blogRepository;
+
+public function injectBlogRepository(\ExtbaseBook\Simpleblog\Domain\Repository\BlogRepository $blogRepository)
+  {
+    $this->blogRepository = $blogRepository;
+  }
+```
+
+Constructor DI looks pretty similar: instead of creating a new method, the constructor method is used:
+```php
+/**
+  * Blog Repository
+  *
+  * @var \ExtbaseBook\Simpleblog\Domain\Repository\BlogRepository
+  */
+protected $blogRepository;
+
+public function __construct(\ExtbaseBook\Simpleblog\Domain\Repository\BlogRepository $blogRepository)
+  {
+    $this->blogRepository = $blogRepository;
+  }
+```
+
+## Domain-Drive Design (DDD)
+
+The whole business process and logic of the customer is called a "domain". DDD is used to put the focus on this domain and neglect technical specifications, such as infrastructure or programming language.
+Extbase is based upon DDD, so it doesn't provide e.g. an Image upload function, but offers a quick way to implement the domain.
+
+The application draft is primarily based on a model. A model is an abstraction of a real object. The domain model is a plan or blueprint of the containing objects, their properties and their relations.
+The domain model is created by the customer (the domain expert) and the developer (either consultant or product manager). It is important to not enload the domain model building process with technical details. The domain model should be comprehensive to the customer without technical knowledge.
+
+### Entity
