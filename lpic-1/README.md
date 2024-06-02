@@ -103,4 +103,51 @@ GPT ist Teil des UEFI-Standards, aber GPT-partitionierte Festplatten können auc
 Auf BIOS-PCs wird der zweite Teil von GRUB in einer speziellen BIOS-Partition gespeichert.
 Auf UEFI-PCs wird GRUB von der Firmware aus den Dateien grubia32.efi oder grubx64.eif von einer Partition names ESP (Efi System Partition) geladen.
 
-Die /boot-Partition enthält für Bootprozess nötige Dateien.
+Die /boot-Partition enthält für Bootprozess nötige Dateien. Bei allen Dateien steht das Suffix -VERSION für die Version des verwendeten Kernels.
+Diese sind Konfigurationsdateien, Systemzuordnung, Linux-Kernel, initiales RAM-Dateisystem, Bootloaderbezogene Dateien.
+Der Linux-Kernel ist üblicherweise mit dem Präfix vmlinux- (oder vmlinuz-) versehen.
+
+## Shared Libraries & Shared Objects
+Allgemein bezeichnet dies Teile von kompiliertem, wiederverwendbarem Code (z.B. Funktionen oder Klassen), der von verschiedenen Programmen wiederholt verwendet werden kann.
+
+Die Umwandlung von Programm- in ausführbaren Maschinencode geschieht, grob gesagt, in zwei Schritten: Zunächst erstellt der "Compiler" maschinen-ausführbaren Code und speichert diesen in Objektdateien.
+Dann verbindet der "Linker" die Objektdateien und "verlinkt" diese mit Bibliotheken, um die endgültig ausführbare Datei zu erstellen.
+> In Windows sind diese Bibliotheken mit dem Dateitype `.dll` markiert.
+
+### Statisches und dynamisches Verlinken
+Die o.a. Verlinkungen kann statisch oder dynamisch erfolgen.
+
+#### Statisches Verlinken
+Wie oben beschrieben "verlinkt" oder "verknüpft" der Linker Bibliotheken mit den Objektdateien zu einem bestimmten Zeitpunkt des Buildprozesses. Nennen wir diesen Zeitpunkt "Verknüpfungszeit".
+
+Beim statischen Verlinken wird die Bibliothek zur Verknüpfungszeit mit dem Programm zusammengeführt. Dabei wird *eine Kopie des Bibliothekscodes in das Programm eingebettet und somit Teil des Programms*. Dadurch hat das Programm *zur Laufzeit* keine Abhängigkeiten zu der Bibliothek, weil es den Bibliothekscode bereits beinhaltet.
+Man spricht bei diesen Bibliotheken von "static libraries".
+
+* Vorteil: es ist keine Bereitstellung von Bibliotheken zur Laufzeit des Programms notwendig
+* Nachteil: die statisch gelinkten Programme benötigen mehr Speicherplatz
+
+#### Dynamisches Verlinken
+Beim dynamischen Verlinken sorgt der Linker dafür, dass das Programm Referenzen zu den benötigten Bibliotheken verwendet.
+Es wird hierbei, im Gegensatz zum statische Verlinken, kein Bibliothekscode in das Programm kopiert. Das bedeutet, dass die Bibliothek zur Laufzeit des Programms zur Verfügung stehen muss.
+Dieser Ansatz kann als ökonimisch betrachtet werden, da die Programme weniger Speicherplatz benötigen und die sog. "shared libraries" nur einmalig als Kopie in den Speicher geladen werden, selbst wenn diese von mehreren Programmen verwendet wird.
+
+### Namenskonventionen
+Eine gemeinsam genutzte Bibliothek ("shared library"; s.o.), also ein "shared object", wird mit einem `soname` betitelt, also einen "shared object name".
+Dieser besteht aus den folgenden Teilen:
+* Bibliotheksname (meist mit Präfix `lib`)
+* `so` (für "shared object")
+* Versionsnummer der Bibliothek
+
+Beispiel: `libpthread.so.0`
+
+Bei statischen Bibliotheken enden die Dateien auf `.a`: `libpthread.a`.
+
+In der Praxis ist es gängig, dass man für den Namen der Verlinkung einen allgemeineren Dateinamen verwendet, der wiederum auf die genaue Version der shared library verweist.
+Beispiel: `libmlx5-rdmav34.so -> ../libmlx5.so.1.24.50.0`
+
+Übliche Speicherorte für gemeinsam genutzte Bibliotheken unter Linux sind:
+* `/lib`
+* `/lib32`
+* `/lib64`
+* `/usr/lib`
+* `/usr/local/lib`
