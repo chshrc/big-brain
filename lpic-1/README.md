@@ -151,3 +151,20 @@ Beispiel: `libmlx5-rdmav34.so -> ../libmlx5.so.1.24.50.0`
 * `/lib64`
 * `/usr/lib`
 * `/usr/local/lib`
+
+### Konfigurationen
+
+Der Linker ist unter dem Programm `ld.so` in Ubuntu zu finden.
+Beim Linken durchsucht der Linker eine Reihe von Verzeichnissen, welche durch den Bibliothekspfad angegeben werden. Dieser wird in `/etc/ld.so.conf` konfiguriert oder die Pfade werden auf mehrere Dateien unter `/etc/ld.so.conf.d/` aufgeteilt.
+Das Programm `ldconfig` liest die Pfade und speichert die symbolischen Links zu den Pfaden in der Cachedatei `/etc/ld.so.cache`.
+Das bedeutet, dass bei jeglicher Änderung einer Bibliotheksdatei das Programm `ldconfig` neu ausgeführt werden muss.
+
+Über `sudo ldconfig -v` erhält man eine Übersicht der verwendeten Bibliotheken.
+
+Man kann zusätzliche Pfade für geteilte Bibliotheken hinzufügen. Hierzu belegt man die Umgebungsvariable `LD_LIBRARY_PATH` mit absoluten Pfaden zu den gewünschten Ordnern mit Bibliotheken. Man kann mehrere, durch Doppelpunkt getrennte Pfade angeben.
+
+### Abhängigkeiten
+Um die von einem Programm benötigten Shared Libraries nachzuschlagen, verwendet man den Befehl `ldd`.
+
+Beispiel:
+`ldd $(which git)`
